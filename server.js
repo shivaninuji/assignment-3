@@ -5,6 +5,7 @@ const passport = require("passport");
 const authRoute = require("./routes/auth");
 const cookieSession = require("cookie-session");
 const passportStrategy = require("./passport");
+const { router, OTP_SECRET_KEY } = require("./path/to/auth"); // Import from auth.js
 const app = express();
 
 app.use(
@@ -26,7 +27,8 @@ app.use(passport.session());
 // 	})
 // );
 
-app.use("/auth", authRoute);
+// Use the authentication routes defined in auth.js
+app.use("/auth", router);
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Listenting on port ${port}...`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
